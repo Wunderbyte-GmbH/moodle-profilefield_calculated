@@ -44,23 +44,16 @@ class profile_field_calculated extends profile_field_base {
         parent::__construct($fieldid, $userid, $fielddata);
         // Only if we actually need data.
 
-                global $DB;
-                $sql = $this->field->param1;
-                $sql = str_replace('§current_user§',$this->userid,$sql);
+        global $DB;
+        $sql = $this->field->param1;
+        $sql = str_replace('§current_user§',$this->userid,$sql);
 
-                $rs = $DB->get_record_sql($sql);
+        $rs = $DB->get_record_sql($sql);
+        if($rs) {
             $this->data = $rs->data;
-
+        }
     }
 
-    /**
-     * Old syntax of class constructor. Deprecated in PHP7.
-     *
-     * @deprecated since Moodle 3.1
-     */
-    public function profile_field_calculated($fieldid=0, $userid=0) {
-        self::__construct($fieldid, $userid);
-    }
 
     /**
      * Create the code snippet for this field instance
