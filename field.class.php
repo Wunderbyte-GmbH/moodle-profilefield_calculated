@@ -61,15 +61,11 @@ class profile_field_calculated extends profile_field_base {
      * @param moodleform $mform Moodle form instance
      */
     public function edit_field_add($mform) {
-
-
         $label = format_string($this->field->name);
         $mform->addElement('text', $this->inputname, $label);
         $mform->setType( $this->inputname, PARAM_TEXT);
         $mform->hardFreeze($this->inputname);
         $mform->setConstant($this->inputname, $this->data);
-
-
     }
 
     /**
@@ -81,7 +77,6 @@ class profile_field_calculated extends profile_field_base {
         $sql = str_replace('§current_user§',$this->userid,$sql);
         $rs = $DB->get_record_sql($sql);
         return $rs->data;
-
     }
 
 
