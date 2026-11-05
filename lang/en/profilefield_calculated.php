@@ -22,17 +22,17 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Calculated';
-
-$string['queryerrorfalse'] = "Error executing the query: return value is false";
-$string['queryerrorempty'] = "No results found executing the query: cannnot validate";
-$string['queryerroridmissing'] = 'id column is missing in query return values';
-$string['queryerrordatamissing'] = 'data column is missing in query return values';
-$string['queryerrordefaultmissing'] = 'Default value does not exists among the list of allowed values';
-$string['sqlquery'] = 'Sql query';
-$string['numbersqlvalues'] = 'Number of possible values';
-$string['samplesqlvalues'] = 'Sample of possible values';
-$string['sqlerror'] = 'Error executing the query';
 $string['calculated:caneditsql'] = 'Can edit sql query for dynamic menu user custom field';
+$string['numbersqlvalues'] = 'Number of possible values';
 $string['param1sqlhelp'] = 'Sql query';
 $string['param1sqlhelp_help'] = 'The query should return one column: data. Furthermore, it should return at least one value. Example: "select \'hallo\' data"';
+$string['pluginname'] = 'Calculated';
+
+$string['queryerrordatamissing'] = 'data column is missing in query return values';
+$string['queryerrordefaultmissing'] = 'Default value does not exists among the list of allowed values';
+$string['queryerrorempty'] = "No results found executing the query: cannnot validate";
+$string['queryerrorfalse'] = "Error executing the query: return value is false";
+$string['queryerroridmissing'] = 'id column is missing in query return values';
+$string['samplesqlvalues'] = 'Sample of possible values';
+$string['sqlerror'] = 'Error executing the query';
+$string['sqlquery'] = 'Sql query';

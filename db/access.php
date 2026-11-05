@@ -24,10 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 // Specific capability (requires knowing db and sql).
-$capabilities = array(
-    'profilefield/calculated:caneditsql' => array(
+$capabilities = [
+    'profilefield/calculated:caneditsql' => [
         'riskbitmask'  => RISK_CONFIG,
         'captype'      => 'write',
-        'contextlevel' => CONTEXT_SYSTEM
-    )
-);
+        'contextlevel' => CONTEXT_SYSTEM,
+    ],
+];

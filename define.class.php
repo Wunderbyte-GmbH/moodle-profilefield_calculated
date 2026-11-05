@@ -31,7 +31,6 @@
  */
 class profile_define_calculated extends profile_define_base
 {
-
     /**
      * Adds elements to the form for creating/editing this type of profile field.
      *
@@ -41,8 +40,10 @@ class profile_define_calculated extends profile_define_base
 
         // Param 1 for menu type contains the options.
         $form->addElement(
-            'textarea', 'param1', get_string('sqlquery', 'profilefield_calculated'),
-            array('rows' => 6, 'cols' => 40)
+            'textarea',
+            'param1',
+            get_string('sqlquery', 'profilefield_calculated'),
+            ['rows' => 6, 'cols' => 40]
         );
         $form->setType('param1', PARAM_TEXT);
         $form->addHelpButton('param1', 'param1sqlhelp', 'profilefield_calculated');
@@ -69,12 +70,12 @@ class profile_define_calculated extends profile_define_base
      */
     public function define_validate_specific($data, $files) {
         global $DB, $USER;
-        $err = array();
+        $err = [];
 
         $data->param1 = str_replace("\r", '', $data->param1);
         // Le'ts try to execute the query.
         $sql = $data->param1;
-        $sql = str_replace('§current_user§',$USER->id,$sql);
+        $sql = str_replace('§current_user§', $USER->id, $sql);
 
         try {
             $rs = $DB->get_records_sql($sql);
@@ -91,7 +92,7 @@ class profile_define_calculated extends profile_define_base
                 }
             }
         } catch (Exception $e) {
-            $err['param1'] = get_string('sqlerror', 'profilefield_calculated') . ': ' .$e->getMessage();
+            $err['param1'] = get_string('sqlerror', 'profilefield_calculated') . ': ' . $e->getMessage();
         }
         return $err;
     }
@@ -107,7 +108,4 @@ class profile_define_calculated extends profile_define_base
 
         return $data;
     }
-
 }
-
-
