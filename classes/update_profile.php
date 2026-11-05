@@ -16,30 +16,43 @@
 
 namespace profilefield_calculated;
 
-use core_user;
-
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/user/profile/lib.php');
 
+/**
+ * Stores the calculated profile fields of a user when the user logs in.
+ *
+ * @package    profilefield_calculated
+ * @copyright  2024 Wunderbyte GmbH <info@wunderbyte.at>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class update_profile {
-
     /**
-     * Update profile field calculated for a user.
+     * Store the current result of every calculated profile field for the user who logged in.
+     *
+     * Only calculated fields are written. A query without a row empties the stored value; a query that
+     * could not be run leaves the stored value as it is.
      *
      * @param \core\event\user_loggedin $event
      * @return void
      */
-    public static function update_profile(\core\event\user_loggedin $event): void {
+    public static function user_loggedin(\core\event\user_loggedin $event): void {
         global $DB;
-        $data = $event->get_data();
-        $userid = $data['objectid'];
-        $user = core_user::get_user($userid);
-        profile_load_custom_fields($user);
+
+        $userid = (int)$event->objectid;
+        $values = [];
         $fields = $DB->get_records('user_info_field', ['datatype' => 'calculated']);
         foreach ($fields as $field) {
             $fieldobject = profile_get_user_field($field->datatype, $field->id, $userid, $field);
-            $data[$field->shortname] = $fieldobject->display_data();
+            $value = $fieldobject->get_calculated_value();
+            if ($value === null) {
+                continue;
+            }
+            $values[$field->shortname] = $value;
         }
-        profile_save_custom_fields($userid, $data);
+
+        if ($values) {
+            profile_save_custom_fields($userid, $values);
+        }
     }
 }

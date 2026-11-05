@@ -28,6 +28,6 @@ defined('MOODLE_INTERNAL') || die();
 $observers = [
         [
                 'eventname' => 'core\event\user_loggedin',
-                'callback' => '\profilefield_calculated\update_profile::update_profile',
+                'callback' => '\profilefield_calculated\update_profile::user_loggedin',
         ],
 ];
